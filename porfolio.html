@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inza Sandhu | Full Stack Developer</title>
+    <style>
+        /* Reset */
+        * {margin:0; padding:0; box-sizing:border-box; font-family: 'Arial', sans-serif;}
+        body {background: #f4f4f4; color: #333; line-height: 1.6;}
+        
+        /* Container */
+        .container {max-width: 1100px; margin: auto; padding: 20px;}
+
+        /* Header / Hero - Updated to Black */
+        header {
+            background: linear-gradient(135deg,#000000,#222222);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        header h1 {font-size: 3em; margin-bottom: 10px;}
+        header p {font-size: 1.3em; margin-bottom: 20px;}
+        .hero-btn {padding:12px 25px; background:#fff; color:#000; border:none; border-radius:5px; font-weight:bold; cursor:pointer; transition:0.3s; text-decoration: none; display: inline-block;}
+        .hero-btn:hover {background:#ecf0f1; transform: scale(1.05);}
+
+        /* Navigation */
+        nav {display:flex; justify-content:center; gap:25px; margin-top: 20px;}
+        nav a {color:white; text-decoration:none; font-weight:bold; transition:0.3s;}
+        nav a:hover {text-decoration: underline; color:#1abc9c;}
+
+        /* Sections */
+        section {padding:60px 20px; background:white; margin-bottom:20px; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.05);}
+        section h2 {text-align:center; margin-bottom:30px; color:#2c3e50; position: relative;}
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #000;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        section p {max-width:900px; margin:0 auto 20px auto; text-align:center;}
+
+        /* About Me */
+        #about {display: flex; flex-direction: column; align-items: center;}
+        
+        /* Profile Picture Container */
+        .profile-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #000;
+            margin: 20px auto;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        #profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .profile-placeholder {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        #upload-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        #upload-btn:hover {
+            background: #222;
+        }
+        
+        #about .info {text-align:center; margin-top:15px;}
+        #about .info p {margin:5px 0; font-size: 1.1em;}
+
+        /* Skills */
+        .skills {display:flex; flex-wrap:wrap; justify-content:center; gap:15px;}
+        .skill {background:#000; color:white; padding:12px 22px; border-radius:25px; font-weight:bold; transition:0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+        .skill:hover {transform: scale(1.05); background:#222;}
+
+        /* Projects */
+        .projects {display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;}
+        .project-card {background:#f8f9fa; padding:25px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s; border-left: 4px solid #000;}
+        .project-card:hover {transform: translateY(-10px); box-shadow:0 8px 15px rgba(0,0,0,0.2);}
+        .project-card h3 {margin-bottom:10px; color:#000;}
+        .project-card p {text-align:left; margin-bottom:15px; color:#555;}
+        .project-card .tech {display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;}
+        .project-card .tech-tag {background:#e0e0e0; padding: 5px 10px; border-radius: 15px; font-size: 0.85em;}
+        .project-card a {color:#000; text-decoration:none; font-weight:bold; display:inline-block; padding:8px 15px; border:2px solid #000; border-radius:5px; transition:0.3s;}
+        .project-card a:hover {background:#000; color:white;}
+
+        /* Contact */
+        .contact-form {max-width:500px; margin:auto;}
+        .contact-form input, .contact-form textarea {width:100%; padding:12px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; transition:0.3s;}
+        .contact-form input:focus, .contact-form textarea:focus {outline:none; border-color:#000; box-shadow:0 0 5px rgba(0,0,0,0.2);}
+        .contact-form button {padding:12px 25px; background:#000; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; transition:0.3s;}
+        .contact-form button:hover {background:#222; transform: scale(1.05);}
+
+        /* Footer */
+        footer {background:#000; color:white; text-align:center; padding:25px 0;}
+        footer a {color:#1abc9c; text-decoration:none; margin: 0 10px;}
+        footer a:hover {text-decoration: underline; color:white;}
+
+        /* Instructions */
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #000;
+        }
+        
+        .instructions h3 {color: #000; margin-bottom: 10px;}
+        .instructions ul {padding-left: 20px;}
+        .instructions li {margin-bottom: 10px;}
+
+        /* Smooth scroll */
+        html {scroll-behavior: smooth;}
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {font-size: 2.2em;}
+            nav {flex-direction: column; gap: 10px;}
+            .skills {gap: 10px;}
+            .skill {padding: 10px 18px;}
+            .projects {grid-template-columns: 1fr;}
+            .profile-container {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Inza Sandhu</h1>
+        <p>Full Stack Developer | HTML, CSS, JS, React, Node.js</p>
+        <a href="#cv-instructions" class="hero-btn" onclick="downloadCV()">Download CV</a>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Instructions for CV -->
+        <div class="instructions" id="cv-instructions">
+            <h3>How to Download CV:</h3>
+            <ul>
+                <li><strong></strong> Contact me via email to request my CV directly</li>
+            </ul>
+            <button onclick="generateCV()" style="padding: 10px 20px; background: #000; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Generate CV Now</button>
+        </div>
+
+        <!-- About Me -->
+        <section id="about">
+            <h2>About Me</h2>
+            
+            <div class="profile-container">
+                <img id="profile-pic" src="" alt="Profile Picture">
+                <div class="profile-placeholder" id="profile-placeholder">
+                    Upload Your Profile Picture<br>
+                    <button id="upload-btn">Upload Picture</button>
+                    <input type="file" id="picture-upload" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            
+            <div class="info">
+                <p><strong>Email:</strong> inzajuttsandhu@gmail.com</p>
+                <p><strong>Phone:</strong> 03224567813</p>
+                <p><strong>University:</strong> Superior University</p>
+                <p><strong>Degree:</strong> Software Engineering</p>
+            </div>
+            <p>Hello! I am Inza Sandhu, a motivated Full Stack Developer with a passion for building scalable and responsive web applications. Experienced in front-end and back-end technologies, I strive to create efficient, user-friendly solutions that deliver value to users. I am continuously learning and exploring new technologies to improve my skills.</p>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills">
+                <!-- Frontend -->
+                <div class="skill">HTML5</div>
+                <div class="skill">CSS3</div>
+                <div class="skill">JavaScript</div>
+                <!-- Backend -->
+                <div class="skill">Node.js</div>
+                <div class="skill">Express.js</div>
+                <div class="skill">PHP</div>
+                <div class="skill">Python (Flask/Django)</div>
+                <!-- Database -->
+                <div class="skill">MySQL</div>
+                <!-- Other -->
+                <div class="skill">Git & GitHub</div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="projects">
+                <!-- School Management System -->
+                <div class="project-card">
+                    <h3>School Management System</h3>
+                    <p>A comprehensive system to manage school operations including student records, staff management, and academic tracking.</p>
+                    <div class="tech">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/School-Management-System-" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- Fees Collection System -->
+                <div class="project-card">
+                    <h3>Fees Collection System</h3>
+                    <p>A school academy fee management system to track payments, generate invoices, and manage financial records.</p>
+                    <div class="tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Bootstrap</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/Fees-collection-system-for-school-accedmy" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- Mini Project Website -->
+                <div class="project-card">
+                    <h3>Mini Project Website</h3>
+                    <p>A responsive website showcasing various mini-projects with clean UI and interactive elements.</p>
+                    <div class="tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Responsive Design</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/Mini-project-website" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- BMI Calculator -->
+                <div class="project-card">
+                    <h3>BMI Calculator</h3>
+                    <p>A web application to calculate Body Mass Index (BMI) with visual indicators and health recommendations.</p>
+                    <div class="tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">DOM Manipulation</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/BMI-calculator-" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- Python Calculator -->
+                <div class="project-card">
+                    <h3>Python Calculator</h3>
+                    <p>My first Python project - a console-based calculator with arithmetic operations and user-friendly interface.</p>
+                    <div class="tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Console App</span>
+                        <span class="tech-tag">Basic Operations</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/my-first-project-calculator-using-python-" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- Number Guessing Game -->
+                <div class="project-card">
+                    <h3>Number Guessing Game</h3>
+                    <p>An interactive game where users guess a randomly generated number with hints and score tracking.</p>
+                    <div class="tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Game Logic</span>
+                        <span class="tech-tag">Random Module</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/Number-guessing-game" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- Desktop Tutorial -->
+                <div class="project-card">
+                    <h3>Desktop Tutorial</h3>
+                    <p>An educational application to teach basic computer and desktop operations for beginners.</p>
+                    <div class="tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Educational</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/desktop-tutorial" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- HTML Mini Guide -->
+                <div class="project-card">
+                    <h3>HTML Mini Guide</h3>
+                    <p>A beginner-friendly guide explaining HTML structure, tags, and examples with interactive code snippets.</p>
+                    <div class="tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">Documentation</span>
+                        <span class="tech-tag">Learning Resource</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/Html-miniguide" target="_blank">View on GitHub</a>
+                </div>
+                
+                <!-- Check Even or Odd -->
+                <div class="project-card">
+                    <h3>Check Even or Odd</h3>
+                    <p>A simple application that checks whether a number is even or odd with input validation.</p>
+                    <div class="tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">Conditional Logic</span>
+                    </div>
+                    <a href="https://github.com/inzajuttsandhu-ctrl/check-even-or-odd" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-form">
+                <input type="text" placeholder="Your Name" id="name">
+                <input type="email" placeholder="Your Email" id="email">
+                <textarea rows="5" placeholder="Your Message" id="message"></textarea>
+                <button onclick="sendMessage()">Send Message</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with ❤️ by Inza Sandhu</p>
+        <p>
+            <a href="https://linkedin.com/in/inza-sandhu" target="_blank">LinkedIn</a> | 
+            <a href="https://github.com/inzajuttsandhu-ctrl" target="_blank">GitHub</a> | 
+            <a href="mailto:inzajuttsandhu@gmail.com">Email</a>
+        </p>
+        <p style="margin-top: 15px; font-size: 0.9em;">© 2023 Inza Sandhu. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Profile picture upload functionality
+        document.getElementById('upload-btn').addEventListener('click', function() {
+            document.getElementById('picture-upload').click();
+        });
+
+        document.getElementById('picture-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                    alert('File is too large. Please select an image smaller than 5MB.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profilePic = document.getElementById('profile-pic');
+                    profilePic.src = e.target.result;
+                    profilePic.style.display = 'block';
+                    document.getElementById('profile-placeholder').style.display = 'none';
+                    
+                    // Save to localStorage
+                    localStorage.setItem('profilePicture', e.target.result);
+                    alert('Profile picture uploaded successfully!');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Load saved profile picture
+        window.addEventListener('load', function() {
+            const savedPicture = localStorage.getItem('profilePicture');
+            if (savedPicture) {
+                const profilePic = document.getElementById('profile-pic');
+                profilePic.src = savedPicture;
+                profilePic.style.display = 'block';
+                document.getElementById('profile-placeholder').style.display = 'none';
+            }
+        });
+
+        // CV Download Function
+        function downloadCV() {
+            // Check if CV file exists
+            fetch('Inza-Sandhu-CV.pdf')
+                .then(response => {
+                    if (response.ok) {
+                        // File exists, trigger download
+                        const link = document.createElement('a');
+                        link.href = 'Inza-Sandhu-CV.pdf';
+                        link.download = 'Inza-Sandhu-CV.pdf';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        alert('CV downloaded successfully!');
+                    } else {
+                        // File doesn't exist, show instructions
+                        alert('CV file not found. Please use the "Generate CV Now" button or contact me via email.');
+                        document.querySelector('.instructions').scrollIntoView({ behavior: 'smooth' });
+                    }
+                })
+                .catch(() => {
+                    alert('CV file not found. Please use the "Generate CV Now" button or contact me via email.');
+                    document.querySelector('.instructions').scrollIntoView({ behavior: 'smooth' });
+                });
+        }
+
+        // Generate CV Function
+        function generateCV() {
+            const cvContent = `
+INZA SANDHU
+Full Stack Developer
+====================================
+
+CONTACT INFORMATION
+-------------------
+Email: inzajuttsandhu@gmail.com
+Phone: 03224567813
+GitHub: github.com/inzajuttsandhu-ctrl
+LinkedIn: linkedin.com/in/inza-sandhu
+Location: Pakistan
+
+EDUCATION
+---------
+Superior University
+Bachelor of Science in Software Engineering
+Expected Graduation: [Year]
+
+TECHNICAL SKILLS
+----------------
+• Frontend: HTML5, CSS3, JavaScript
+• Backend: Node.js, Express.js, PHP, Python
+• Databases: MySQL
+• Tools: Git, GitHub
+• Concepts: REST APIs, Responsive Design
+
+PROJECTS
+--------
+1. School Management System
+   - Built with PHP, MySQL, HTML/CSS, JavaScript
+   - Comprehensive system for school operations management
+   
+2. Fees Collection System
+   - Developed using Python, Flask, SQLite, Bootstrap
+   - Fee management system for school academies
+   
+3. BMI Calculator
+   - Web application with JavaScript, HTML, CSS
+   - Calculates Body Mass Index with health recommendations
+   
+4. Mini Project Website
+   - Responsive website showcasing various projects
+   - Clean UI with interactive elements
+   
+5. Python Calculator
+   - Console-based calculator application
+   - First Python project with arithmetic operations
+   
+6. Number Guessing Game
+   - Interactive Python game with random number generation
+   
+7. Desktop Tutorial
+   - Educational application for computer basics
+   
+8. HTML Mini Guide
+   - Beginner-friendly HTML documentation
+   
+9. Check Even or Odd
+   - Simple web application for number checking
+
+CERTIFICATIONS
+--------------
+• Full Stack Web Development (if any)
+• Python Programming (if any)
+• Web Technologies (if any)
+
+LANGUAGES
+---------
+• English (Fluent)
+• Urdu (Native)
+
+HOBBIES & INTERESTS
+-------------------
+• Learning new technologies
+• Open source contributions
+• Web development tutorials
+• Problem solving
+            `;
+
+            // Create and download text file
+            const blob = new Blob([cvContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Inza-Sandhu-CV.txt';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            alert('CV generated successfully! You can now save this file as PDF from any text editor.');
+        }
+
+        // Contact form function
+        function sendMessage() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if(name && email && message) {
+                alert(`Thank you ${name}! Your message has been received. I'll contact you at ${email} soon.`);
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please fill in all fields before sending.');
+            }
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
